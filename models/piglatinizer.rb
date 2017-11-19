@@ -5,8 +5,15 @@ class PigLatinizer
     non_pig_latin_words = ["i", "me", "to", "too", "a", "an", "in", "and", "on"]
     vowels = ["a", "e", "i", "o", "u"]
 
-    if non_pig_latin_words.include?(word)
-      word
+    if non_pig_latin_words.include?(word.downcase)
+      #case word
+      #when "an"
+        #word <<"way"
+      #when "i"
+        #word <<""
+      #else
+        word<<"way"
+      #end
     elsif vowels.include? word[0]
       word << "ay"
     else
