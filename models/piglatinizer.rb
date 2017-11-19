@@ -1,38 +1,25 @@
+
 class PigLatinizer
+  attr_reader :text
+
+  VOWELS = %w{a e i o u}
 
   def piglatinize(word)
-
-    non_pig_latin_words = ["i", "me", "to", "too", "a", "an", "in", "and", "on"]
-    vowels = ["a", "e", "i", "o", "u"]
-
-    if non_pig_latin_words.include?(word.downcase)
-      #case word
-      #when "an"
-        #word <<"way"
-      #when "i"
-        #word <<""
-      #else
-        word<<"way"
-      #end
-    elsif vowels.include? word[0]
-      word << "ay"
-    else
-      consonants = ""
-      while !vowels.include?(word[0])
-        consonants << word[0]
-        word = word.split("")[1..-1].join
-      end
-      word + consonants + 'ay'
+    if VOWELS.include?(word[0].downcase)
+      return word + "way"
     end
+
+    split_on = word.chars.index {|letter| VOWELS.include?(letter)}
+
+    word[split_on..-1] + word[0...split_on] + "ay"
   end
 
+  def to_pig_latin(text)
+    words = text.split(" ")
 
-  def to_pig_latin(string)
-    string.split.collect{|word| piglatinize(word)}.join(" ")
+    latinized = words.map do |word|
+      piglatinize(word)
+    end
+    latinized.join(" ")
   end
-
 end
-
-p = PigLatinizer.new
-
-puts p.piglatinize("pork")
