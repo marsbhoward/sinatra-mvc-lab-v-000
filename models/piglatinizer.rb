@@ -2,7 +2,7 @@ class PigLatinizer
 
   def piglatinize(word)
 
-    non_pig_latin_words = ["i", "me", "to", "too", "a", "an", "in", "and", "on","until"]
+    non_pig_latin_words = ["i", "me", "to", "too", "a", "an", "in", "and", "on"]
     vowels = ["a", "e", "i", "o", "u"]
 
     if non_pig_latin_words.include?(word.downcase)
@@ -23,6 +23,8 @@ class PigLatinizer
         word = word.split("")[1..-1].join
       end
       word + consonants + 'ay'
+    else 
+      word << "way"
     end
   end
 
